@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import ConvexClerkProvider from "@/components/providers/ConvexClerkProvider";
 
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ConvexClerkProvider>
     <html lang="en">
       <body
         className={outfit.className}
@@ -23,6 +24,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-    </ClerkProvider>
+    </ConvexClerkProvider>
   );
 }
