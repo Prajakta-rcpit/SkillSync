@@ -26,16 +26,12 @@ export default function RootLayout({
           <ThemeProvider
           attribute="class"
           defaultTheme="system" enableSystem disableTransitionOnChange>
-       <SignedIn>
+    
           <div className="min-h-screen">
           <Navbar/>
           <main> {children}</main>
        </div>
-       </SignedIn>
-     
-       <SignedOut>
-        <RedirectToSignIn/>
-       </SignedOut>
+      
        </ThemeProvider>
       </body>
     </html>
