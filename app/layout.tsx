@@ -5,7 +5,7 @@ import { Outfit } from "next/font/google";
 import ConvexClerkProvider from "@/components/providers/ConvexClerkProvider";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "next-themes";
-import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/nextjs";
 
 
 export const metadata: Metadata = {
@@ -20,18 +20,21 @@ export default function RootLayout({
 }>) {
   return (
     <ConvexClerkProvider>
-    <html lang="en" suppressContentEditableWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={outfit.className}>
           <ThemeProvider
           attribute="class"
           defaultTheme="system" enableSystem disableTransitionOnChange>
-    
+            <SignedIn>
           <div className="min-h-screen">
           <Navbar/>
           <main> {children}</main>
        </div>
-      
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn/>
+      </SignedOut>
        </ThemeProvider>
       </body>
     </html>
