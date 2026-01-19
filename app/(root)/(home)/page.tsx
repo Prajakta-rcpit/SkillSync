@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
+import MeetingModel from "@/components/MeetingModel";
 
 export default function Home() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function Home() {
       default:
         router.push(`/${title.toLowerCase()}`);
     }};
+     
  if (isLoading) return <p>Loading...</p>;
   return (
     <div className="container max-w-7xl mx-auto p-6">
@@ -49,6 +51,12 @@ export default function Home() {
               />
             ))}
       </div>
+      <MeetingModel
+        isOpen={showModal}
+        onClose={()=>setShowModal(false)}
+        title={modalType==='join'?"Join Meeting":"Start meeting"}
+        isJoinMeeting={modalType==="join"}
+      />
       </>
     ): (
       <>
