@@ -1,9 +1,14 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import React, { useState } from 'react'
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import useMeetingActions from './hooks/useMeetingActions';
-
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import React, { useState } from "react";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import useMeetingActions from "./hooks/useMeetingActions";
 
 interface MeetingModalProps {
   isOpen: boolean;
@@ -12,31 +17,41 @@ interface MeetingModalProps {
   isJoinMeeting: boolean;
 }
 
-const MeetingModel = ({isOpen, onClose, title, isJoinMeeting}: MeetingModalProps) => {
-  const [meetingUrl, setMeetingUrl] = useState("")
-  const {createInstantMeeting, joinMeeting} = useMeetingActions()
- 
-  const handleStart= ()=>{
-    if(isJoinMeeting){
-      const meetingId = meetingUrl.split("/").pop()
-      if(meetingId) joinMeeting(meetingId)
-    }
-    else{
-      createInstantMeeting()
+const MeetingModel = ({
+  isOpen,
+  onClose,
+  title,
+  isJoinMeeting,
+}: MeetingModalProps) => {
+  const [meetingUrl, setMeetingUrl] = useState("");
+  const { createInstantMeeting, joinMeeting } = useMeetingActions();
+
+  const handleStart = () => {
+    if (isJoinMeeting) {
+      const meetingId = meetingUrl.split("/").pop();
+      if (meetingId) joinMeeting(meetingId);
+    } else {
+      createInstantMeeting();
     }
     setMeetingUrl("");
     onClose();
-  }
- 
- 
-  return <Dialog open={isOpen} onOpenChange={onClose}>
-    <DialogContent className="sm:max-w-[425px]">
-      <DialogHeader>
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
+
+          <DialogDescription className="sr-only">
+            {isJoinMeeting
+              ? "Join an existing meeting using a meeting link"
+              : "Start a new instant meeting"}
+          </DialogDescription>
         </DialogHeader>
 
-      <div className='space-y-4 pt-4'>
-        {isJoinMeeting && (
+        <div className="space-y-4 pt-4">
+          {isJoinMeeting && (
             <Input
               placeholder="Paste meeting link here..."
               value={meetingUrl}
@@ -48,17 +63,17 @@ const MeetingModel = ({isOpen, onClose, title, isJoinMeeting}: MeetingModalProps
             <Button variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button onClick={handleStart} disabled={isJoinMeeting && !meetingUrl.trim()}>
+            <Button
+              onClick={handleStart}
+              disabled={isJoinMeeting && !meetingUrl.trim()}
+            >
               {isJoinMeeting ? "Join Meeting" : "Start Meeting"}
             </Button>
           </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
-
-      </div>
-
-
-    </DialogContent>
-  </Dialog>
-}
-
-export default MeetingModel
+export default MeetingModel;
