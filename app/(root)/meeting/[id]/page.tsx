@@ -1,22 +1,65 @@
-"use client"
-import useGetCallById from '@/components/hooks/useGetCallById';
-import LoaderUI from '@/components/LoaderUI';
-import MeetingRoom from '@/components/MeetingRoom';
-import MeetingSetup from '@/components/MeetingSetup';
-import { useUser } from '@clerk/nextjs';
-import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
-import { useParams } from 'next/navigation'
-import React, { useState } from 'react'
+// "use client"
+// import useGetCallById from '@/components/hooks/useGetCallById';
+// import LoaderUI from '@/components/LoaderUI';
+// import MeetingRoom from '@/components/MeetingRoom';
+// import MeetingSetup from '@/components/MeetingSetup';
+// import { useUser } from '@clerk/nextjs';
+// import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
+// import { useParams } from 'next/navigation'
+// import React, { useState } from 'react'
+
+// const MeetingPage = () => {
+//   const {id} = useParams();
+//   const {isLoaded} = useUser();
+//   const [isSetupComplete, setIsSetupComplete] = useState(false);
+//   const {call,isCallLoading} = useGetCallById(id);
+
+//   if(!isLoaded || isCallLoading) return <LoaderUI/>
+
+//  if (!call) {
+//     return (
+//       <div className="h-screen flex items-center justify-center">
+//         <p className="text-2xl font-semibold">Meeting not found</p>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <StreamCall call={call}>
+//       <StreamTheme>
+//         {!isSetupComplete? (<MeetingSetup onSetupComplete={()=> setIsSetupComplete}/>) : (<MeetingRoom/>)}
+//       </StreamTheme>
+//     </StreamCall>
+//   )
+// }
+
+// export default MeetingPage
+
+
+
+"use client";
+
+import useGetCallById from "@/components/hooks/useGetCallById";
+import LoaderUI from "@/components/LoaderUI";
+import MeetingRoom from "@/components/MeetingRoom";
+import MeetingSetup from "@/components/MeetingSetup";
+import { useUser } from "@clerk/nextjs";
+import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
+import { useParams } from "next/navigation";
+import React, { useState } from "react";
 
 const MeetingPage = () => {
-  const {id} = useParams();
-  const {isLoaded} = useUser();
+  const params = useParams<{ id: string }>();
+  const id = params.id;
+
+  const { isLoaded } = useUser();
   const [isSetupComplete, setIsSetupComplete] = useState(false);
-  const {call,isCallLoading} = useGetCallById(id);
 
-  if(!isLoaded || isCallLoading) return <LoaderUI/>
+  const { call, isCallLoading } = useGetCallById(id);
 
- if (!call) {
+  if (!isLoaded || isCallLoading) return <LoaderUI />;
+
+  if (!call) {
     return (
       <div className="h-screen flex items-center justify-center">
         <p className="text-2xl font-semibold">Meeting not found</p>
@@ -27,10 +70,14 @@ const MeetingPage = () => {
   return (
     <StreamCall call={call}>
       <StreamTheme>
-        {!isSetupComplete? (<MeetingSetup onSetupComplete={()=> setIsSetupComplete}/>) : (<MeetingRoom/>)}
+        {!isSetupComplete ? (
+          <MeetingSetup onSetupComplete={() => setIsSetupComplete(true)} />
+        ) : (
+          <MeetingRoom />
+        )}
       </StreamTheme>
     </StreamCall>
-  )
-}
+  );
+};
 
-export default MeetingPage
+export default MeetingPage;
