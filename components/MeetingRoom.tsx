@@ -1,10 +1,8 @@
-import { CallingState, useCallStateHooks } from '@stream-io/video-react-sdk';
+import { CallingState, CallParticipantsList, PaginatedGridLayout, SpeakerLayout, useCallStateHooks } from '@stream-io/video-react-sdk';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { LoaderIcon } from 'lucide-react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './ui/resizable';
-
-
 
 
 const MeetingRoom = () => {
@@ -26,7 +24,24 @@ const MeetingRoom = () => {
   return (
     <ResizablePanelGroup direction='horizontal'>
       <ResizablePanel defaultSize={35} minSize={25} maxSize={100} className='relative'>
-        <h1>Video will go here</h1>
+        <div className='absolute insert-0'>
+        {layout ==='grid' ? <PaginatedGridLayout/>: <SpeakerLayout/>}
+         {showParticipants && (
+              <div className="absolute right-0 top-0 h-full w-[300px] bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                <CallParticipantsList onClose={() => setShowParticipants(false)} />
+              </div>
+            )}
+        </div>
+
+        <div>
+          <div>
+            <div>
+          </div>
+          </div>
+          </div>
+
+
+
        </ResizablePanel>
        <ResizableHandle withHandle/>
 
