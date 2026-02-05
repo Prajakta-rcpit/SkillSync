@@ -8,7 +8,7 @@ import {
 } from "@stream-io/video-react-sdk";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { LayoutListIcon, LoaderIcon } from "lucide-react";
+import { LayoutListIcon, LoaderIcon, UsersIcon } from "lucide-react";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -33,6 +33,7 @@ const MeetingRoom = () => {
   }
 
   return (
+    <div className="h-[calc(100vh-4rem-1px)]">
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel
         defaultSize={35}
@@ -71,6 +72,15 @@ const MeetingRoom = () => {
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="size-10"
+                    onClick={() => setShowParticipants(!showParticipants)}
+                  >
+                    <UsersIcon className="size-4" />
+                  </Button>
+                  <button>end call btn</button>
                 </div>
             </div>
           </div>
@@ -82,6 +92,7 @@ const MeetingRoom = () => {
         <h1>Code editor will go here</h1>
       </ResizablePanel>
     </ResizablePanelGroup>
+    </div>
   );
 };
 
