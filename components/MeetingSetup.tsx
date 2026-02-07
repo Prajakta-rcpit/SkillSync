@@ -32,7 +32,7 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
     <div className="min-h-screen flex items-center justify-center p-6 bg-background/95">
       <div className="w-full max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
+         
           <Card className="md:col-span-1 p-6 flex flex-col">
             <div>
               <h1 className="text-xl font-semibold mb-1">Camera Preview</h1>
@@ -46,10 +46,9 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
             </div>
           </Card>
 
-
           <Card className="md:col-span-1 p-6">
             <div className="h-full flex flex-col">
-              
+            
               <div>
                 <h2 className="text-xl font-semibold mb-1">Meeting Details</h2>
                 <p className="text-sm text-muted-foreground break-all">{call.id}</p>
@@ -57,7 +56,7 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
 
               <div className="flex-1 flex flex-col justify-between">
                 <div className="spacey-6 mt-8">
-                  
+      
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -75,6 +74,7 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
                       onCheckedChange={(checked) => setIsCameraDisabled(!checked)}
                     />
                   </div>
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -92,7 +92,6 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
                       onCheckedChange={(checked) => setIsMicDisabled(!checked)}
                     />
                   </div>
-
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -106,13 +105,12 @@ function MeetingSetup({ onSetupComplete }: { onSetupComplete: () => void }) {
                     <DeviceSettings />
                   </div>
                 </div>
-
                 <div className="space-y-3 mt-8">
                   <Button className="w-full" size="lg" onClick={handleJoin}>
                     Join Meeting
                   </Button>
                   <p className="text-xs text-center text-muted-foreground">
-                    Do not worry, our team is super friendly! We want you to succeed. 🎉
+                    Do not worry, our team is super friendly! We want you to succeed. 
                   </p>
                 </div>
               </div>
