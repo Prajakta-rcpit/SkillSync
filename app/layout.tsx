@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
 import { Outfit } from "next/font/google";
-// import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClerkProvider from "@/components/providers/ConvexClerkProvider";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "next-themes";
