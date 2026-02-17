@@ -7,6 +7,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 import MeetingModel from "@/components/MeetingModel";
+import LoaderUI from "@/components/LoaderUI";
 
 export default function Home() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function Home() {
         router.push(`/${title.toLowerCase()}`);
     }};
      
- if (isLoading) return <p>Loading...</p>;
+ if (isLoading) return <LoaderUI/>
   return (
     <div className="container max-w-7xl mx-auto p-6">
      <div className="rounded-lg bg-card p-6 border shadow-sm mb-10">
