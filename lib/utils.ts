@@ -73,9 +73,36 @@ export const calculateRecordingDuration = (startTime: string, endTime: string) =
   return `${duration.seconds} seconds`;
 };
 
+// export const getMeetingStatus = (interview: Interview) => {
+//   const now = new Date();
+//   const interviewStartTime = interview.startTime;
+//    const endTime = addHours(interviewStartTime, 1);
+
+//   if (
+//     interview.status === "completed" ||
+//     interview.status === "failed" ||
+//     interview.status === "succeeded"
+//   )
+//     return "completed";
+//   if (isWithinInterval(now, { start: interviewStartTime, end: endTime })) return "live";
+//   if (isBefore(now, interviewStartTime)) return "upcoming";
+//   return "completed";
+// };
+
+import {
+  addHours,
+  isBefore,
+  isAfter,
+  intervalToDuration,
+  isWithinInterval,
+} from "date-fns";
+import { Doc } from "@/convex/_generated/dataModel";
+
+
 export const getMeetingStatus = (interview: Interview) => {
   const now = new Date();
-  const interviewStartTime = interview.startTime;
+
+  const interviewStartTime = new Date(interview.startTime);
   const endTime = addHours(interviewStartTime, 1);
 
   if (
@@ -84,7 +111,11 @@ export const getMeetingStatus = (interview: Interview) => {
     interview.status === "succeeded"
   )
     return "completed";
-  if (isWithinInterval(now, { start: interviewStartTime, end: endTime })) return "live";
+
+  if (isWithinInterval(now, { start: interviewStartTime, end: endTime }))
+    return "live";
+
   if (isBefore(now, interviewStartTime)) return "upcoming";
+
   return "completed";
 };

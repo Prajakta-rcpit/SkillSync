@@ -2,7 +2,6 @@ import { useUser } from "@clerk/nextjs";
 import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useMutation, useQuery } from "convex/react";
 import { useState } from "react";
-// import { api } from "../../../../convex/_generated/api";
 import toast from "react-hot-toast";
 import {
   Dialog,
@@ -25,7 +24,7 @@ import UserInfo from "@/components/UserInfo";
 import { Loader2Icon, XIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { TIME_SLOTS } from "@/constants";
-// import MeetingCard from "@/components/MeetingCard";
+import MeetingCard from "@/components/MeetingCard";
 import { api } from "@/convex/_generated/api";
 
 function InterviewScheduleUI() {
@@ -279,7 +278,7 @@ function InterviewScheduleUI() {
         </Dialog>
       </div>
 
-      {/* {!interviews ? (
+      {!interviews ? (
         <div className="flex justify-center py-12">
           <Loader2Icon className="size-8 animate-spin text-muted-foreground" />
         </div>
@@ -293,7 +292,7 @@ function InterviewScheduleUI() {
         </div>
       ) : (
         <div className="text-center py-12 text-muted-foreground">No interviews scheduled</div>
-      )} */}
+      )}
     </div>
   );
 }
