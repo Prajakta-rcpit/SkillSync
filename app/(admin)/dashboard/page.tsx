@@ -114,7 +114,6 @@ function DashboardPage() {
                               </div>
                             </div>
                           </CardContent>
-
                           <CardFooter className="p-4 pt-0 flex flex-col gap-3">
                             {interview.status === "completed" && (
                               <div className="flex gap-2 w-full">
@@ -130,6 +129,7 @@ function DashboardPage() {
                                   <CheckCircle2Icon className="h-4 w-4 mr-2" />
                                   Pass
                                 </Button>
+
                                 <Button
                                   variant="destructive"
                                   className="flex-1"
@@ -142,7 +142,10 @@ function DashboardPage() {
                                 </Button>
                               </div>
                             )}
-                            <CommentDialog interviewId={interview._id} />
+
+                            {category.id !== "upcoming" && (
+                              <CommentDialog interviewId={interview._id} />
+                            )}
                           </CardFooter>
                         </Card>
                       );
